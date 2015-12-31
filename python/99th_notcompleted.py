@@ -4,7 +4,7 @@ def digit(n):
     return len(str(n))
 
 def basedigit(a,b):
-    return digit(a)*b
+    return (digit(a)-1)*b+1
 
 def compare(a,b):
     bd = [basedigit(a[0],a[1]),basedigit(b[0],b[1])]
@@ -13,6 +13,7 @@ def compare(a,b):
     elif bd[0]<bd[1]:
         return 1
     else:
+	print str(bd[0])+'\t'+str(bd[1])
         return 1
 
 nominee = []
@@ -27,5 +28,7 @@ for line in f:
 maxline = 0
 
 for i in range(1,len(nominee)):
-    if compare(nominee(maxline),nominee(i))==1:
+    if compare(nominee[maxline],nominee[i])==1:
         maxline = i
+
+print maxline

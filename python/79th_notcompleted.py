@@ -1,71 +1,72 @@
-# candidate generator
-def gen(n,res):
-        if n==1:
-                res2 = []
-                for i in range(1,10):
-                        res2.append(str(i))
-                return res2
-        res2 = []
-        for i in range(len(res)):
-                for j in range(10):
-                        res2.append(res[i]+str(j))
-        return res2
-                        
-# pw checker (n, pw -> string)
-def checker(n,pw):
-        pwc = 0
-        res = 0
-        for i in range(len(n)):
-                if pw[pwc]==n[i]:
-                        pwc+=1
-                        res+=1
-                if res==3:
-                        return 1
-        if res==3:
-                return 1
-        return 0
+import numpy as np
 
-f = open('keylog.txt','r')
+## check if the string contains target
+def longestInclusion(string,target):
+    if len(string)<len(target):
+        return 0
+    if len(target)==1:
+        if target in string:
+            return 1
+        else:
+            return 0
+    i=0
+    for char in target:
+        check = 0
+        while True:
+            try:
+                if string[i]==char:
+                    check = 1
+                    break
+            except IndexError:
+                check = 0
+                break
+            i+=1
+        if check==0:
+            break
+    if check==1:
+        return len(target)
+    else:
+        ## all strings with length for target-1
+        maxtt = 0
+        for j in range(len(target)):
+            tt = longestInclusion(string,target[:j]+target[j+1:])
+            if tt==len(target)-1:
+                return tt
+            if tt>=maxtt:
+                maxtt = tt
+        return maxtt
+
+## generate new string which contains target
+def addStr(string,target):
+    ## check if string contains target
+    strLen = longestInclusion(string,target)
+    if strLen==len(target):
+        return string
+    return string
+
+## find shortest for n data
+def shortestStrings(keys):
+    if len(keys)==1:
+        return keys
+    else:
+        stringCand = shortestStrings(keys[:-1])
+        newStringCand = []
+        minStrLength = np.inf
+        for string in stringCand:
+            newString = addStr(string,keys[-1])
+            newStringLen = len(newString)
+            if newStringLen==minStrLength:
+                newStringCand.append(newString)
+            elif newStringLen<minStrLength:
+                newStringCand = [newString]
+                minStrLength = newStringLen
+        return newStringCand
+
+
+
+f = open('./keylog.txt','r')
 keys = []
 
 for line in f:
-        line.strip('\n')
+        line = line.strip('\n')
         keys.append(line)
-
-# checker
-#keys = ['132','124','125','234','245','345']
-
-# length of pw
-lop = 1
-finres = ''
-cand = []
-cand2 = []
-
-# matching score
-mc = 20
-
-while(True):
-        cand = gen(lop,cand2)
-        cand2 = []
-        if lop<3:
-                lop+=1
-                continue
-        fin = 0
-        # if all pw are not matched with candidate, discard it
-        candchecker = 50
-        for i in range(len(cand)):
-                tempch = 0
-                for j in range(len(keys)):
-                        if checker(str(cand[i]),keys[j])==0:
-                                candchecker-=1
-                                tempch = 1
-                if tempch==0:
-                        fin = 1
-                        finres = cand[i]
-                        break
-                if candchecker>=mc:
-                        cand2.append(cand[i])
-        if fin==1:
-                print finres
-                break
-        lop+=1

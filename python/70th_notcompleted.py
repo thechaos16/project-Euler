@@ -16,16 +16,14 @@ def perm(a,b):
         return 1
     return 0
 
+## need to be improved
 def relapri(a,b):
-    x,y=max(a,b),min(a,b)
-    while 1:
-        temp = x
-        x = y
-        y = temp%y
-        if x==1:
-            return 1
-        if y==0:
-            return 0
+	x,y = max(a,b), min(a,b)
+	for i in range(2,int(math.sqrt(y))+1):
+		if y%i==0:
+			if x%i==0 or x%(y/i)==0:
+				return 0
+	return 1
 
 def euler(n):
     cnt=1
