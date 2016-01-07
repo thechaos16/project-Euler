@@ -1,6 +1,31 @@
 import numpy as np
 
 ## check if the string contains target
+def containStr(string,target):
+    if len(string)<len(target):
+        return 0
+    if len(target)==1:
+        if target in string:
+            return 1
+        else:
+            return 0
+    i=0
+    for char in target:
+        check = 0
+        while True:
+            try:
+                if string[i]==char:
+                    check = 1
+                    break
+            except IndexError:
+                check = 0
+                break
+            i+=1
+        if check==0:
+            return 0
+    if check==1:
+        return 1
+
 def longestInclusion(string,target):
     if len(string)<len(target):
         return 0
@@ -70,3 +95,19 @@ keys = []
 for line in f:
         line = line.strip('\n')
         keys.append(line)
+
+f.close()
+
+radix = 5
+while True:
+    check = 0
+    for i in range(10**(radix-1),10**radix):
+        for key in keys:
+            if not containStr(str(i),key):
+                check = 1
+                break
+        if check==0:
+            break
+    if check==0:
+        break
+    radix+=1
