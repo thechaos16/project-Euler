@@ -68,6 +68,9 @@ class prime_handler:
 		f = open(filePath,'w')
 		f.write(primeStr)
 		f.close()
+
+	def getPrimeList(self):
+		return self.returnList
 		
 
 if __name__=='__main__':
