@@ -1,25 +1,21 @@
-import math
+import time
+import numpy as np
 
 def perm(a,b):
     a = str(a)
     b = str(b)
     if len(a)!=len(b):
         return 0
-    l1 = []
-    l2 = []
-    for i in range(len(a)):
-        l1.append(a[i])
-        l2.append(b[i])
-    l1.sort()
-    l2.sort()
-    if l1==l2:
+    if sorted(a)==sorted(b):
         return 1
     return 0
 
 ## need to be improved
 def relapri(a,b):
 	x,y = max(a,b), min(a,b)
-	for i in range(2,int(math.sqrt(y))+1):
+	if x%y==0:
+		return 0
+	for i in range(2,int(np.ceil(np.sqrt(y)))):
 		if y%i==0:
 			if x%i==0 or x%(y/i)==0:
 				return 0
@@ -27,18 +23,33 @@ def relapri(a,b):
 
 def euler(n):
     cnt=1
+    notLi = []
     for i in range(2,n):
+        check = 0
+        for j in notLi:
+            if i%j==0:
+                check=1
+                break
+        if check:
+            continue
         if relapri(i,n)==1:
             cnt+=1
+        else:
+            notLi.append(i)
     return cnt
+
+
 
 minimum = 1.2
 ans = 0
-for i in range(1,1000000):
+
+start = time.clock()
+for i in range(10001,100000):
     temp = euler(i)
-    if perm(i,temp)==1:
+    if perm(i,temp):
         if float(i)/float(temp)<minimum:
             minimum = float(i)/float(temp)
             ans = i
-
-print ans
+end = time.clock()
+print("%.2gs" % (end-start))
+print(ans)
