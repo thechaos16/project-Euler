@@ -6,3 +6,6 @@ __pycache
 
 ## txt files
 *.txt
+
+## useless cache files
+*.py~
