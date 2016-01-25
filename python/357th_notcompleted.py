@@ -1,24 +1,5 @@
 import math
-
-def isprime(n,pri):
-    if n in pri:
-        return 1
-    for i in range(len(pri)):
-        if n%pri[i]==0:
-            return 0
-    for i in range(2,int(math.sqrt(n))+1):
-        if n%i==0:
-            return 0
-    #pri.append(n)
-    return 1
-
-def primeLessThan(n):
-    #priList = [2]
-    priList = []
-    for i in range(2,n+1):
-        if isprime(i,priList):
-            priList.append(i)
-    return priList
+import prime_handler as ph
 
 def divisors(n):
     div = []
@@ -28,11 +9,11 @@ def divisors(n):
                 div.append(i+n/i)
     return div
 
-def checker(n,priList):
+def checker(n,obj = None):
     div = divisors(n)
     dd=0
     for i in range(len(div)):
-        if isprime(div[i],priList)==0:
+        if obj.is_prime(div[i])==0:
             dd=1
             break
     if dd==0:
@@ -44,10 +25,11 @@ nn = []
  #   if checker(i)==1:
   #      nn.append(i)
 
-priList = primeLessThan(100000000)
+phi = ph.PrimeHandler(100000000)
+prime_list = phi.get_prime_list()
 print('list is finished')
 cnt=0
-for prime in priList:
-    if checker(prime-1,priList):
+for prime in prime_list:
+    if checker(prime-1,prime_list):
         #print(prime-1)
         cnt+=prime-1
