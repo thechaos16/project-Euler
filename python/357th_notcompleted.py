@@ -26,10 +26,11 @@ nn = []
   #      nn.append(i)
 
 phi = ph.PrimeHandler(100000000)
+#phi = ph.PrimeHandler(10000000)
 prime_list = phi.get_prime_list()
 print('list is finished')
 cnt=0
 for prime in prime_list:
-    if checker(prime-1,prime_list):
+    if checker(prime-1,phi):
         #print(prime-1)
         cnt+=prime-1
