@@ -14,9 +14,9 @@ def factorial(n):
         if init<10e5:
             continue
         if i%5==0:
-            init = last_six_digit_parser(init)
+            init = last_six_digit_parser(int(init))
         else:
-            init = int(str(init)[-6:])
+            init = init%10e5
     return init
         
 if __name__=='__main__':

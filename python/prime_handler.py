@@ -3,7 +3,7 @@
 import numpy as np
 
 class PrimeHandler:
-    def __init__(self,number,file_path=None):
+    def __init__(self,number=2,file_path=None):
         self.number = number
         if file_path is None:
             file_path = './prime_list.txt'
@@ -37,9 +37,11 @@ class PrimeHandler:
     ## check if given number is prime
     def is_prime(self,number):
         for pri in self.prime_list:
+            if pri>=number:
+                return True
             if number%pri==0:
-                return 0
-        return 1
+                return False
+        return True
 
     ## prime less than number
     def prime_less_than(self):
@@ -49,7 +51,7 @@ class PrimeHandler:
             max_prime = 2
     
         if self.number <= max_prime:
-            prime_array = np.array(self.pirme_list)
+            prime_array = np.array(self.prime_list)
             return_list = prime_array[prime_array<=self.number]
             return [return_list,False]
         for i in range(max_prime,self.number+1):
@@ -74,4 +76,4 @@ class PrimeHandler:
 		
 
 if __name__=='__main__':
-	phi = PrimeHandler(15000)
+	phi = PrimeHandler(1500000)

@@ -1,7 +1,5 @@
-import os,sys
-import math
+import prime_handler as ph
 
-prime = [2]
 digits = [0,1,2,3,4,5,6,7,8,9]
 
 # return combination (0~n-1)
@@ -32,38 +30,6 @@ def comb(n,r):
                         if temp2 not in res:
                             res.append(temp2)
     return res
-
-# set prime less than n
-def setprime(n):
-    for i in range(2,n):
-        temp = isprime(i)
-    f = file('prime.txt','w')
-    for i in range(len(prime)):
-        f.write(str(prime[i]))
-        f.write('\n')
-    f.close()
-
-# read prime.txt
-def defprime():
-    f = file('prime.txt','r')
-    for line in f:
-        temp = line.strip('\n')
-        if int(temp) not in prime:
-            prime.append(int(temp))
-        
-
-# check if there is a prime
-def isprime(n):
-    if n in prime:
-        return 1
-    if n<=prime[len(prime)-1]:
-        return 0
-    for i in range(2,n/2+1):
-        if n%i==0:
-            return 0
-    prime.append(n)
-    prime.sort()
-    return 1
 
 # convert list to integer
 def ltoi(l):
@@ -105,16 +71,16 @@ def candidate(l,n,d):
                 temp[l[i][kk]] = str(d)
     return res
 
-def finres(num,d):
+def final_result(num,d,phi):
     m = -1
     n = 0
     s = 0
-    for i in range(num):
+    for i in range(1,num+1):
         temp = num-i
         tempcomb = comb(num,i)
         res = candidate(tempcomb,num,d)
         for j in range(len(res)):
-            if isprime(res[j])==1:
+            if phi.is_prime(res[j])==1:
                 m = temp
                 n+=1
                 s+=res[j]
@@ -124,10 +90,12 @@ def finres(num,d):
         s = 0
     return [m,n,s]
 
-ans = []
-n = 10
-#n = 4
-defprime()
-#setprime(int(math.pow(10,n+1)))
-for i in range(10):
-    ans.append(finres(n,i))
+
+if __name__=='__main__':
+    ans = []
+    n = 10
+    #n = 4
+    phi = ph.PrimeHandler()
+    #setprime(int(math.pow(10,n+1)))
+    for i in range(10):
+        ans.append(final_result(n,i,phi))
