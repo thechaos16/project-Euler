@@ -46,15 +46,15 @@ class PrimeHandler:
     ## prime less than number
     def prime_less_than(self):
         try:
-            max_prime = max(self.prime_list)
+            self.max_prime = max(self.prime_list)
         except ValueError:
-            max_prime = 2
+            self.max_prime = 2
     
-        if self.number <= max_prime:
+        if self.number <= self.max_prime:
             prime_array = np.array(self.prime_list)
             return_list = prime_array[prime_array<=self.number]
             return [return_list,False]
-        for i in range(max_prime,self.number+1):
+        for i in range(self.max_prime,self.number+1):
             if i%2==0:
                 continue
             if self.is_prime(i):
@@ -63,12 +63,11 @@ class PrimeHandler:
 
     ## update prime list (now it's re-writing, and it should be just update for reducing time complexity)
     def update_prime_list(self,file_path):
-        ## sort pList
         self.prime_list.sort()
-        string_list = [str(elm) for elm in self.prime_list]
+        string_list = [str(elm) for elm in self.prime_list if elm>self.max_prime]
         prime_string = '\t'.join(string_list)
-        f = open(file_path,'w')
-        f.write(prime_string)
+        f = open(file_path,'a')
+        f.write('\t'+prime_string)
         f.close()
 
     def get_prime_list(self):
@@ -76,4 +75,4 @@ class PrimeHandler:
 		
 
 if __name__=='__main__':
-	phi = PrimeHandler(1500000)
+	phi = PrimeHandler(15000000)
