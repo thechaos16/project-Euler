@@ -1,4 +1,4 @@
-import prime_handler as ph
+import moduels.prime_handler as ph
 
 digits = [0,1,2,3,4,5,6,7,8,9]
 
@@ -90,8 +90,7 @@ def final_result(num,d,phi):
         s = 0
     return [m,n,s]
 
-
-if __name__=='__main__':
+def run():
     ans = []
     n = 10
     #n = 4
@@ -99,3 +98,4 @@ if __name__=='__main__':
     #setprime(int(math.pow(10,n+1)))
     for i in range(10):
         ans.append(final_result(n,i,phi))
+    return ans

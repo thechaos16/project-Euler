@@ -1,6 +1,3 @@
-import sys,os
-import math
-
 # check if there's path between A and B
 def ispath(mat,a,b):
     if mat[a][b]!=-1:
@@ -155,19 +152,21 @@ def won(mat):
                cnt+=int(mat[i][j])
     return cnt
 
-f = file('p107_network.txt','r')
-mat = []
-for line in f:
-    line = line.strip('\n')
-    temp = line.split(',')
-    mat.append(temp)
-
-# algorithms
-# delete every edge except 780 SSSPs
-# delete largest edge until it breaks condition
-# sssp
-trimmed = sssp(mat)
-# delete largest edge until terminal condition
-ans = red(trimmed)
-# answer
-res = won(ans)
+def run(required_file):
+    f = open(required_file,'r')
+    mat = []
+    for line in f:
+        line = line.strip('\n')
+        temp = line.split(',')
+        mat.append(temp)
+    
+    # algorithms
+    # delete every edge except 780 SSSPs
+    # delete largest edge until it breaks condition
+    # sssp
+    trimmed = sssp(mat)
+    # delete largest edge until terminal condition
+    ans = red(trimmed)
+    # answer
+    res = won(ans)
+    return res

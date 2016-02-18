@@ -1,5 +1,5 @@
 import math
-import prime_handler as ph
+import moduels.prime_handler as ph
 
 def divisors(n):
     div = []
@@ -20,17 +20,14 @@ def checker(n,obj = None):
         return 1
     return 0
 
-nn = []
-#for i in range(2,100000000):
- #   if checker(i)==1:
-  #      nn.append(i)
-
-phi = ph.PrimeHandler(100000000)
-#phi = ph.PrimeHandler(10000000)
-prime_list = phi.get_prime_list()
-print('list is finished')
-cnt=0
-for prime in prime_list:
-    if checker(prime-1,phi):
-        #print(prime-1)
-        cnt+=prime-1
+def run():    
+    phi = ph.PrimeHandler(100000000)
+    #phi = ph.PrimeHandler(10000000)
+    prime_list = phi.get_prime_list()
+    print('list is finished')
+    cnt=0
+    for prime in prime_list:
+        if checker(prime-1,phi):
+            #print(prime-1)
+            cnt+=prime-1
+    return cnt

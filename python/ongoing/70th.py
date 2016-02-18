@@ -38,18 +38,16 @@ def euler(n):
             notLi.append(i)
     return cnt
 
-
-
-minimum = 1.2
-ans = 0
-
-start = time.clock()
-for i in range(10001,100000):
-    temp = euler(i)
-    if perm(i,temp):
-        if float(i)/float(temp)<minimum:
-            minimum = float(i)/float(temp)
-            ans = i
-end = time.clock()
-print("%.2gs" % (end-start))
-print(ans)
+def run():
+    minimum = 1.2
+    ans = 0
+    start = time.clock()
+    for i in range(10001,100000):
+        temp = euler(i)
+        if perm(i,temp):
+            if float(i)/float(temp)<minimum:
+                minimum = float(i)/float(temp)
+                ans = i
+    end = time.clock()
+    print("%.2gs" % (end-start))
+    return ans

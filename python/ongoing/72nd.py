@@ -16,11 +16,13 @@ def reduceProp(n):
             for j in range(1,divI):
                 setCand = setCand-{j*i}
     return len(setCand)
-    
-start = time.clock()
-res = 0
-for i in range(2,10000):
-    res+=reduceProp(i)
-end = time.clock()
-print(res)
-print(end-start)
+
+
+def run():    
+    start = time.clock()
+    res = 0
+    for i in range(2,10000):
+        res+=reduceProp(i)
+    end = time.clock()
+    print(end-start)
+    return res

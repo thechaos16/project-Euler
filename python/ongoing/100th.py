@@ -16,10 +16,12 @@ def is_equ(n):
         elif temp_res>0:
             return None
 
-i = 10**12
-
-while True:
-    if is_equ(i) is not None:
-        print(i)
-        break
-    i+=1
+def run():
+    i = 10**12
+    
+    while True:
+        if is_equ(i) is not None:
+            print(i)
+            break
+        i+=1
+    return i

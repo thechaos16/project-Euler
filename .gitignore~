@@ -2,10 +2,7 @@
 *.pyc
 
 ## pycache
-/__pycache__/
+__pycache
 
 ## txt files
 *.txt
-
-## useless cache files
-*.py~

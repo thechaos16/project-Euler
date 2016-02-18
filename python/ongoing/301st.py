@@ -37,3 +37,6 @@ def Nim(a,b,c):
             return True
             
     return False
+
+def run():
+    pass

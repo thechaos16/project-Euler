@@ -1,4 +1,8 @@
-import math
+
+def run():
+    [x,res] = ans(1000)
+    return [x,res]
+
 
 def sqrt(n):
     temp = pow(n,0.5)
@@ -27,7 +31,5 @@ def ans(d):
         if x<=tempx:
             x = tempx
             res = i
-            print [x, res, tempy]
+            print([x, res, tempy])
     return [x, res]
-
-[x, res] = ans(1000)

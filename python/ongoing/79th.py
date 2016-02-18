@@ -88,26 +88,26 @@ def shortestStrings(keys):
         return newStringCand
 
 
-
-f = open('./keylog.txt','r')
-keys = []
-
-for line in f:
-        line = line.strip('\n')
-        keys.append(line)
-
-f.close()
-
-radix = 5
-while True:
-    check = 0
-    for i in range(10**(radix-1),10**radix):
-        for key in keys:
-            if not containStr(str(i),key):
-                check = 1
+def run(required_file):
+    f = open(required_file,'r')
+    keys = []    
+    for line in f:
+            line = line.strip('\n')
+            keys.append(line)
+    
+    f.close()
+    
+    radix = 5
+    while True:
+        check = 0
+        for i in range(10**(radix-1),10**radix):
+            for key in keys:
+                if not containStr(str(i),key):
+                    check = 1
+                    break
+            if check==0:
                 break
         if check==0:
             break
-    if check==0:
-        break
-    radix+=1
+        radix+=1
+    return radix

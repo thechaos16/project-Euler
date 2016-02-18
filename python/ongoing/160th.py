@@ -18,8 +18,9 @@ def factorial(n):
         else:
             init = init%10e5
     return init
-        
-if __name__=='__main__':
+
+def run():
     number = 1000000000000
     #number = 100000000
     kk = factorial(number)
+    return kk
