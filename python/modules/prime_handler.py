@@ -1,12 +1,14 @@
 ## Notes
 ## file format: prime \t prime \t ......
 import numpy as np
+import os
 
 class PrimeHandler:
     def __init__(self,number=2,file_path=None):
         self.number = number
         if file_path is None:
-            file_path = './prime_list.txt'
+            cur_dir = os.getcwd()
+            file_path = os.path.join(cur_dir,'prime_list.txt')
         ## read prime
         self.prime_list = self.read_exsited_prime(file_path)
         ## get primes less than number
