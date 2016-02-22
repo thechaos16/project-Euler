@@ -5,7 +5,6 @@ Created on Thu Feb 18 13:42:20 2016
 @author: minkyu
 """
 
-import modules.prime_handler as ph
 import importlib
 
 if __name__=='__main__':
