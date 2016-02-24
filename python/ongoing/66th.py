@@ -10,8 +10,8 @@ def run(input_int=1000):
     phi = ph.PrimeHandler(input_int)
     prime_list = phi.get_prime_list()
     input_list = range(input_int)
-    #[x,res] = get_result(prime_list)
-    [x,res] = get_result(input_list)
+    [x,res] = get_result(prime_list)
+    #[x,res] = get_result(input_list)
     return [x,res]
 
 

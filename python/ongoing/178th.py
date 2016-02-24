@@ -21,10 +21,20 @@ def is_step_number(n):
     
 def is_pandigital_number(n):
     keys = set(str(n))
-    if len(keys)==9:
+    if len(keys)==10:
         return True
     return False
 
-def run():  
-    aa = 10e8
+def run():
+    start = 10e8
     limit = 10e40
+    cnt = 0
+    while True:
+        if is_pandigital_number(start) and is_step_number(start):
+            cnt+=1
+        if start>=limit:
+            break
+        start+=1
+        if start%100000000000000000==0:
+            print(start)
+    print(cnt)

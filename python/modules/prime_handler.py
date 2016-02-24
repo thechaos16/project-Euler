@@ -8,7 +8,7 @@ class PrimeHandler:
         self.number = number
         if file_path is None:
             cur_dir = os.getcwd()
-            file_path = os.path.join(cur_dir,'prime_list.txt')
+            file_path = os.path.join(os.path.join(cur_dir.split('python')[0],os.path.join('python','modules')),'prime_list.txt')
         ## read prime
         self.prime_list = self.read_exsited_prime(file_path)
         ## get primes less than number
@@ -22,19 +22,20 @@ class PrimeHandler:
         try:
             f = open(file_path,'r')
             ## read all primes
-            prime_string = f.readline().strip('\n').strip('')
+            prime_string = f.readline().strip('\n').strip('\t').strip('')
             f.close()
             ## parsing
             prime_list = prime_string.split('\t')
-            if len(prime_list):
+            if len(prime_list)==0:
                 return []
-            prime_list = [int(elm) for elm in prime_list]
-            return prime_list
+            to_integer = [int(elm) for elm in prime_list if elm!='']
+            return to_integer
         ## if there is no such file, make it
         except FileNotFoundError:
             f = open(file_path,'w')
+            f.write('2')
             f.close()
-            return []
+            return [2]
 
     ## check if given number is prime
     def is_prime(self,number):
@@ -46,17 +47,20 @@ class PrimeHandler:
         return True
 
     ## prime less than number
-    def prime_less_than(self):
+    def prime_less_than(self,num=None):
         try:
             self.max_prime = max(self.prime_list)
         except ValueError:
             self.max_prime = 2
+            
+        if num is None:
+            num = self.number
     
-        if self.number <= self.max_prime:
+        if num <= self.max_prime:
             prime_array = np.array(self.prime_list)
-            return_list = prime_array[prime_array<=self.number]
+            return_list = prime_array[prime_array<=num]
             return [return_list,False]
-        for i in range(self.max_prime,self.number+1):
+        for i in range(int(self.max_prime),int(num+1)):
             if i%2==0:
                 continue
             if self.is_prime(i):
@@ -77,4 +81,4 @@ class PrimeHandler:
 		
 
 if __name__=='__main__':
-	phi = PrimeHandler(15000000)
+	phi = PrimeHandler(15000)
