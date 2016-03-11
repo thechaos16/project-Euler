@@ -1,5 +1,10 @@
 import math
-import moduels.prime_handler as ph
+import sys
+try:
+    import modules.prime_handler as ph
+except ImportError:
+    sys.path.append('../')
+    import modules.prime_handler as ph
 
 def divisors(n):
     div = []
@@ -31,3 +36,6 @@ def run():
             #print(prime-1)
             cnt+=prime-1
     return cnt
+
+if __name__=='__main__':
+    pass

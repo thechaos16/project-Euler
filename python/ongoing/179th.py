@@ -18,7 +18,7 @@ def run():
     prev_fact_num = None
     factor_dict = {}
     while True:
-        if i>1000:
+        if i>10e7:
             break
         [result,prev_fact_num,factor_dict] = check_factor_number(i,prev_fact_num,factor_dict)
         if result:
