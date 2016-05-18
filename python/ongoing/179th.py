@@ -22,7 +22,7 @@ def run():
             break
         [result,prev_fact_num,factor_dict] = check_factor_number(i,prev_fact_num,factor_dict)
         if result:
-            #print(i)
+            print(i)
             cnt+=1            
         i+=1
     return cnt
